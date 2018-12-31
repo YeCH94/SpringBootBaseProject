@@ -1,0 +1,25 @@
+sping:
+  datasource:
+    url: jdbc:h2:~/test
+    name: sa
+    driver-class-name: org.h2.Driver
+  freemarker:
+    cache: false
+  jpa:
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+  h2:
+    console:
+      enabled: true
+  devtools:
+    livereload:
+      enabled: true
+    remote:
+      restart:
+        enabled: true
+  mvc:
+    static-path-pattern: /static/**
+
+server:
+  port: 8080
