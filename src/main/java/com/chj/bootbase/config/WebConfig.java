@@ -9,7 +9,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 public class WebConfig {
 
     @Bean
-    public ObjectMapper objectMapper(Jackson2ObjectMapperBuilder builder){
+    public ObjectMapper objectMapper(Jackson2ObjectMapperBuilder builder) {
         return builder.build();
     }
 }
