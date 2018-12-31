@@ -1,4 +1,4 @@
-package com.ch.bootexercise;
+package com.chj.bootbase;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

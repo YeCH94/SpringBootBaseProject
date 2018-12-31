@@ -1,4 +1,4 @@
-package com.ch.bootexercise.config;
+package com.chj.bootbase.config;
 
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 

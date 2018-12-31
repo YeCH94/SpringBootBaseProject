@@ -1,4 +1,4 @@
-package com.ch.bootexercise.service;
+package com.chj.bootbase.service;
 
 public class CustomMemberService {
 }

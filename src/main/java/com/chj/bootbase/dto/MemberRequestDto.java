@@ -1,4 +1,4 @@
-package com.ch.bootexercise.dto;
+package com.chj.bootbase.dto;
 
 public class MemberRequestDto {
 }
