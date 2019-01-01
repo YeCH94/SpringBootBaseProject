@@ -1,4 +1,4 @@
-sping:
+spring:
   datasource:
     url: jdbc:h2:~/test
     name: sa
@@ -20,6 +20,10 @@ sping:
         enabled: true
   mvc:
     static-path-pattern: /static/**
+  security:
+    user:
+      name: user
+      password: password
 
 server:
   port: 8080
