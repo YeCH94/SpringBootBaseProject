@@ -4,23 +4,27 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 
-@RequestMapping("/")
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
 
-    @GetMapping("/login")
+    @RequestMapping("/")
     public String home(Model model, Principal principal){
         model.addAttribute("auth", principal);
-        return "login";
+        return "index";
     }
-    @PostMapping("/login")
-    public String doLogin(){
-        return "redirect:/login";
+
+    @GetMapping("/admin")
+    public String admin(){
+        return "admin";
+    }
+
+    @GetMapping("/user")
+    public String user(){
+        return "user";
     }
 }
