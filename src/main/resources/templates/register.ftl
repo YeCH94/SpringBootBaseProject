@@ -19,7 +19,7 @@
             <input type="text" id="username" name="name" class="form-control" placeholder="User Name">
         </p>
         <p>
-            <label for="E-Mail" class="sr-only">Username</label>
+            <label for="E-Mail" class="sr-only">E-mail</label>
             <input type="email" id="email" name="email" class="form-control" placeholder="E-mail">
         </p>
         <p>

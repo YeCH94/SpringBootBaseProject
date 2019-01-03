@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:~/test
+    url: jdbc:h2:~/jinhyung
     name: sa
     driver-class-name: org.h2.Driver
   freemarker:
@@ -20,7 +20,6 @@ spring:
         enabled: true
   mvc:
     static-path-pattern: /static/**
-
 
 server:
   port: 8080

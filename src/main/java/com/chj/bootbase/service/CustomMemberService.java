@@ -36,7 +36,7 @@ public class CustomMemberService implements MemberService{
         member.setUsername(registration.getName());
         member.setEmail(registration.getEmail());
         member.setPassword(passwordEncoder.encode(registration.getPassword()));
-        member.setRoles(Arrays.asList(new Role("ROLE_USER")));
+        member.setRoles(Arrays.asList(new Role("USER")));
         return memberRepository.save(member);
     }
 

@@ -42,7 +42,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .failureForwardUrl("/login?error")
                 .defaultSuccessUrl("/")
                 .permitAll()
                 .and()
@@ -52,7 +51,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .clearAuthentication(true)
                 .permitAll()
                 .and()
-                .headers().frameOptions().sameOrigin();
+                .headers().frameOptions().sameOrigin()
+                .and()
+                .csrf().disable()
+                .headers().frameOptions().disable();
     }
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
