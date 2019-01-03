@@ -20,10 +20,7 @@ spring:
         enabled: true
   mvc:
     static-path-pattern: /static/**
-  security:
-    user:
-      name: user
-      password: password
+
 
 server:
   port: 8080
