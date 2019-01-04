@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
-public class CustomMemberService implements MemberService{
+public class MemberServiceImpl implements MemberService{
 
     @Autowired
     private MemberRepository memberRepository;
@@ -43,7 +43,7 @@ public class CustomMemberService implements MemberService{
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Member member = memberRepository.findByEmail(email);
-        if(member == null){
+        if(member == null ){
             throw new UsernameNotFoundException("Invalid user E-mail or password");
         }
         return new org.springframework.security.core.userdetails.User(member.getEmail(),

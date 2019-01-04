@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:~/jinhyung
+    url: jdbc:h2:~/jinhyung;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE
     name: sa
     driver-class-name: org.h2.Driver
   freemarker:
@@ -9,6 +9,7 @@ spring:
     show-sql: true
     properties:
       hibernate.format_sql: true
+    hibernate.ddl-auto: update
   h2:
     console:
       enabled: true

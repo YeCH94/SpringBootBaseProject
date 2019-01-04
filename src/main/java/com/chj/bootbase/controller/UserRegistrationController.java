@@ -2,10 +2,9 @@ package com.chj.bootbase.controller;
 
 import com.chj.bootbase.domain.Member;
 import com.chj.bootbase.dto.MemberRequestDto;
-import com.chj.bootbase.service.CustomMemberService;
+import com.chj.bootbase.service.MemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,7 +18,7 @@ import javax.validation.Valid;
 public class UserRegistrationController {
 
     @Autowired
-    private CustomMemberService customMemberService;
+    private MemberServiceImpl memberServiceImpl;
 
     @ModelAttribute("Member")
     public MemberRequestDto memberRequestDto(){
@@ -33,7 +32,7 @@ public class UserRegistrationController {
 
     @PostMapping
     public String registerMember(@ModelAttribute("Member") @Valid MemberRequestDto memberRequestDto, BindingResult result){
-        Member existing = customMemberService.findByEmail(memberRequestDto.getEmail());
+        Member existing = memberServiceImpl.findByEmail(memberRequestDto.getEmail());
 
         if(existing != null){
             result.rejectValue("email", null, "There is already an registered with that E-mail");
@@ -42,7 +41,7 @@ public class UserRegistrationController {
             return "register";
         }
 
-        customMemberService.save(memberRequestDto);
+        memberServiceImpl.save(memberRequestDto);
         return "redirect:/register?success";
     }
 }
