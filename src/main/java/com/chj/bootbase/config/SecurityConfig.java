@@ -21,34 +21,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MemberService memberService;
 
-//    @Autowired
-//    CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    @Autowired
+    AuthSuccessHandler authSuccessHandler;
+
+    @Autowired
+    AuthFailureHandler authFailureHandler;
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/resource/**");
+                .antMatchers("/resource/**","/register/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/" ,"/h2-console/**", "/register/**", "/static/**").permitAll()
+                .antMatchers("/" ,"/h2-console/**").permitAll()
+                .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .usernameParameter("email")
-                .passwordParameter("password")
                 .defaultSuccessUrl("/")
+                .successHandler(authSuccessHandler)
+                .failureHandler(authFailureHandler)
+                .loginPage("/login")
+                .usernameParameter("email").passwordParameter("password")
                 .permitAll()
                 .and()
                 .logout()
                 .logoutUrl("/logout").logoutSuccessUrl("/")
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
+                .invalidateHttpSession(true).clearAuthentication(true)
                 .permitAll()
                 .and()
                 .headers().frameOptions().sameOrigin()
@@ -69,12 +73,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return auth;
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("user@gmali.com").password("password").roles("USER")
-//                .and()
-//                .withUser("admin@gmail.com").password("password").roles("ADMIN");
+    @Autowired
+    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("user@gmali.com").password("password").roles("USER")
+                .and()
+                .withUser("admin@gmail.com").password("password").roles("ADMIN");
         auth.authenticationProvider(authenticationProvider());
     }
 }
