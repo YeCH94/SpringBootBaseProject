@@ -12,7 +12,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class HomeController {
 
-    @RequestMapping("/")
+    @RequestMapping(value = {"/", "/main"})
     public String home(Model model, Principal principal){
         model.addAttribute("auth", principal);
         return "index";
