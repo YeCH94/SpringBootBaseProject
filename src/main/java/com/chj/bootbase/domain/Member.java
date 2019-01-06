@@ -2,18 +2,18 @@ package com.chj.bootbase.domain;
 
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import java.util.Collection;
+
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @Table(name = "member")
-public class Member {
+public class Member{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +41,7 @@ public class Member {
                     name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
-    private Collection< Role > roles;
+    private List<Role> roles;
 
     @Override
     public String toString() {
@@ -61,7 +61,7 @@ public class Member {
     }
 
     @Builder
-    public Member(String username, String email, String password, Collection <Role> roles){
+    public Member(String username, String email, String password, List <Role> roles){
         this.username = username;
         this.email = email;
         this.password = password;
