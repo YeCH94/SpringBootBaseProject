@@ -1,6 +1,7 @@
 package com.chj.bootbase.domain;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -8,9 +9,8 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @NoArgsConstructor
 @Getter
-@Setter
 @Table(name = "role")
-public class Role {
+public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,5 +30,10 @@ public class Role {
                 "id = " + id +
                 ", name = '" + username + '\'' +
                 '}';
+    }
+
+    @Override
+    public String getAuthority() {
+        return this.username;
     }
 }
