@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,7 +14,7 @@
     <form class="form-signin" action="/login" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
         <p>
-            <label for="E-Mail" class="sr-only">Username</label>
+            <label for="email" class="sr-only">User E-Mail</label>
             <input type="email" id="email" name="email" class="form-control" placeholder="E-mail">
         </p>
         <p>
@@ -25,9 +25,11 @@
         <input name="_csrf" type="hidden" value="0e0b074d-e0ce-4fe2-9cc6-b9f349458e3c">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
-    <#if error ??>
-        <p>The email or password you have entered is invalid, try again.</p>
+    <#if securityException ??>
+        <p><${"securityException"}/p>
     </#if>
+
 </div>
+
 </body>
 </html>
