@@ -2,6 +2,7 @@ package com.chj.bootbase.controller;
 
 import com.chj.bootbase.domain.Member;
 import com.chj.bootbase.dto.MemberRequestDto;
+import com.chj.bootbase.error.AlreadyExistException;
 import com.chj.bootbase.service.MemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,10 +36,7 @@ public class UserRegistrationController {
         Member existing = memberServiceImpl.findByEmail(memberRequestDto.getEmail());
 
         if(existing != null){
-            result.rejectValue("email", null, "There is already an registered with that E-mail");
-        }
-        if(result.hasErrors()){
-            return "register";
+            throw new AlreadyExistException("중복된 E-Mail 입니다.");
         }
 
         memberServiceImpl.save(memberRequestDto);

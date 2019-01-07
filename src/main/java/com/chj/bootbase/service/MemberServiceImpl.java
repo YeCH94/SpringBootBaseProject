@@ -11,9 +11,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,9 +46,9 @@ public class MemberServiceImpl implements MemberService{
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Member member = memberRepository.findByEmail(email);
         if(member == null ){
-            throw new UsernameNotFoundException("Invalid user E-mail or password");
+            throw new UsernameNotFoundException("E-Mail이나 비밀번호가 유효하지 않습니다.");
         }
-        return new org.springframework.security.core.userdetails.User(member.getEmail(),
+        return new org.springframework.security.core.userdetails.User(member.getUsername(),
                 member.getPassword(),
                 mapRolesToAuthorities(member.getRoles()));
     }
