@@ -45,6 +45,7 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Member member = memberRepository.findByEmail(email);
+        
         if(member == null ){
             throw new UsernameNotFoundException("E-Mail이나 비밀번호가 유효하지 않습니다.");
         }

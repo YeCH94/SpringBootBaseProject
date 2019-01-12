@@ -1,19 +1,25 @@
 package com.chj.bootbase.controller;
 
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletRequest;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
 
     @RequestMapping(value = "/login")
-    public String login(){
-
-        return "login";
+    public ModelAndView login(@RequestParam(value = "error", required = false) String error,
+                        @RequestParam(value = "logout", required = false) String logout){
+        ModelAndView mav = new ModelAndView();
+        if(error != null){
+            mav.addObject("error", "Invalid username of password");
+        }
+        if(logout != null){
+            mav.addObject("msg", "You have been logged out");
+        }
+        mav.setViewName("login");
+        return mav;
     }
+
 }
