@@ -28,11 +28,12 @@ public class AuthFailureHandler implements AuthenticationFailureHandler {
         this.loginPasswordName = "password";
         this.loginRedirectName = "loginRedirect";
         this.exceptionMsgName = "securityException";
-        this.defaultFailureUrl = "/login";
+        this.defaultFailureUrl = "/login?error";
     }
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+
 
         String loginId = request.getParameter(loginIdName);
         String loginPassword = request.getParameter(loginPasswordName);
