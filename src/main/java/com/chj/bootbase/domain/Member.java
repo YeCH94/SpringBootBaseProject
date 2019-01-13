@@ -25,13 +25,11 @@ public class Member{
     private String username;
 
     @Column(unique = true)
-    @NotEmpty(message = "Please provide your E-mail")
-    @Email(message = "Please provide an E-mail form")
+    @NotEmpty
     private String email;
 
     @Column
-    @NotEmpty(message = "Please provide your password")
-    @Length(min = 7, message = "Your password must have at least 7 characters")
+    @NotEmpty
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

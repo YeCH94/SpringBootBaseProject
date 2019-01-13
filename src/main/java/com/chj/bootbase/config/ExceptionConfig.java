@@ -6,53 +6,56 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @ControllerAdvice
 public class ExceptionConfig extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(InternalServerException.class)
-    public final ResponseEntity<Object> handleInternalServerException(Exception ex, HttpServletRequest request){
-        List<String> details = new ArrayList<>();
-        details.add(ex.getLocalizedMessage());
-        ErrorResponse error = new ErrorResponse("Server Error", details);
-        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    public final ModelAndView handleInternalServerException(Exception ex, HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        ErrorResponse error = new ErrorResponse(ex.getLocalizedMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        mav.addObject("error", error);
+        mav.setViewName("error");
+        return mav;
     }
 
     @ExceptionHandler(AlreadyExistException.class)
-    public final ResponseEntity<Object> handleAlreadyExistException(Exception ex, HttpServletRequest request){
-        List<String> details = new ArrayList<>();
-        details.add(ex.getLocalizedMessage());
-        ErrorResponse error = new ErrorResponse("이미 존재하는 유저입니다.", details);
-        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    public final ModelAndView handleAlreadyExistException(Exception ex, HttpServletRequest request){
+        ModelAndView mav = new ModelAndView("register");
+        ErrorResponse error = new ErrorResponse(ex.getLocalizedMessage(), HttpStatus.CONFLICT);
+        mav.addObject("error", error);
+        return mav;
     }
 
     @ExceptionHandler(BadRequestException.class)
-    public final ResponseEntity<Object> handleBadRequestException(Exception ex, HttpServletRequest request){
-        List<String> details = new ArrayList<>();
-        details.add(ex.getLocalizedMessage());
-        ErrorResponse error = new ErrorResponse("Bad Request", details);
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    public final ModelAndView handleBadRequestException(Exception ex, HttpServletRequest request){
+        ModelAndView mav = new ModelAndView("register");
+        ErrorResponse error = new ErrorResponse(ex.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
+        mav.addObject("error", error);
+        return mav;
     }
 
     @ExceptionHandler(ForbiddenException.class)
-    public final ResponseEntity<Object> handleForbiddenException(Exception ex, HttpServletRequest request){
-        List<String> details = new ArrayList<>();
-        details.add(ex.getLocalizedMessage());
-        ErrorResponse error = new ErrorResponse("Forbidden Page", details);
-        return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
+    public final ModelAndView handleForbiddenException(Exception ex, HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        ErrorResponse error = new ErrorResponse(ex.getLocalizedMessage(), HttpStatus.FORBIDDEN);
+        mav.addObject("error", error);
+        mav.setViewName("error");
+        return mav;
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public final ResponseEntity<Object> handleNotFoundException(Exception ex, HttpServletRequest request){
-        List<String> details = new ArrayList<>();
-        details.add(ex.getLocalizedMessage());
-        ErrorResponse error = new ErrorResponse("페이지를 찾을 수 없습니다.", details);
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    public final ModelAndView handleNotFoundException(Exception ex, HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        ErrorResponse error = new ErrorResponse(ex.getLocalizedMessage(), HttpStatus.NOT_FOUND);
+        mav.addObject("error", error);
+        mav.setViewName("error");
+        return mav;
     }
 }

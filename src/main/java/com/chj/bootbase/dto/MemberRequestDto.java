@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -17,19 +20,22 @@ import javax.validation.constraints.NotNull;
 public class MemberRequestDto {
 
     @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Please provide your name")
     private String name;
 
     @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Please provide your E-mail")
+    @Email(message = "Please provide an E-mail form")
     private String email;
 
     @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Please provide your password")
+    @Length(min = 7, message = "Your password must have at least 7 characters")
     private String password;
 
     @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Please check your password")
+    @Length(min = 7, message = "Your password must have at least 7 characters")
     private  String confirm_password;
 
     @Builder

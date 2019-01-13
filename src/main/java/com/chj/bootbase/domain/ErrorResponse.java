@@ -4,19 +4,18 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
+import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class ErrorResponse {
     private String errMsg;
-    private List<String> details;
+    private HttpStatus status;
 
     @Builder
-    public ErrorResponse(String errMsg, List<String> details){
+    public ErrorResponse(String errMsg, HttpStatus status){
         setErrMsg(errMsg);
-        setDetails(details);
+        setStatus(status);
     }
 }
