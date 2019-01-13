@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Table(name = "member")
-public class Member{
+public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,18 +51,20 @@ public class Member{
                 ", roles = '" + roles +
                 '}';
     }
+
     @Builder
-    public Member(String username, String email, String password){
+    public Member(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
     }
 
     @Builder
-    public Member(String username, String email, String password, List <Role> roles){
+    public Member(String username, String email, String password, List<Role> roles) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.roles = roles;
     }
+
 }

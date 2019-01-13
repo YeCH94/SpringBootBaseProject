@@ -3,6 +3,7 @@ package com.chj.bootbase.service;
 import com.chj.bootbase.domain.Member;
 import com.chj.bootbase.domain.Role;
 import com.chj.bootbase.dto.MemberRequestDto;
+import com.chj.bootbase.error.BadRequestException;
 import com.chj.bootbase.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -47,11 +48,11 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Member member = memberRepository.findByEmail(email);
-        
-        if(member == null ){
+        Member member = this.memberRepository.findByEmail(email);
+
+        if(member == null)
             throw new UsernameNotFoundException("E-Mail이나 비밀번호가 유효하지 않습니다.");
-        }
+
         return new org.springframework.security.core.userdetails.User(member.getUsername(),
                 member.getPassword(),
                 mapRolesToAuthorities(member.getRoles()));
@@ -61,5 +62,10 @@ public class MemberServiceImpl implements MemberService{
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getUsername()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Member findPassword(String email) {
+        return memberRepository.findPassword(email);
     }
 }
