@@ -25,9 +25,8 @@
 
         <input name="_csrf" type="hidden" value="0e0b074d-e0ce-4fe2-9cc6-b9f349458e3c">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-
     </form>
-
+    <button  class="btn btn-lg btn-primary btn-block"><a href="/findMember" methods="get"></a></button>
     <#if error ??>
         <p>${error}</p>
     </#if>
