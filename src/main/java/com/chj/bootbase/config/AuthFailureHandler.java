@@ -34,7 +34,6 @@ public class AuthFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
 
-
         String loginId = request.getParameter(loginIdName);
         String loginPassword = request.getParameter(loginPasswordName);
         String loginRedirect = request.getParameter(loginRedirectName);

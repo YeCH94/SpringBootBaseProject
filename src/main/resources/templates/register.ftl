@@ -16,25 +16,27 @@
         <h2 class="form-signin-heading">Please sign in</h2>
         <p>
             <label for="User Name" class="sr-only">Username</label>
-            <input type="text" id="username" name="name" class="form-control" placeholder="User Name">
+            <input type="text" id="username" name="name" class="form-control" placeholder="User Name" required>
         </p>
         <p>
             <label for="E-Mail" class="sr-only">E-mail</label>
-            <input type="email" id="email" name="email" class="form-control" placeholder="E-mail">
+            <input type="email" id="email" name="email" class="form-control" placeholder="E-mail" required autofocus>
         </p>
         <p>
             <label for="password" class="sr-only">Password</label>
-            <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
         </p>
         <p>
             <label for="Confirm Password" class="sr-only">Password</label>
-            <input type="password" id="Confirm_Password" name="confirm_password" class="form-control" placeholder="Confirm_Password">
+            <input type="password" id="Confirm_Password" name="confirm_password" class="form-control" placeholder="Confirm_Password" required>
         </p>
-
         <input name="_csrf" type="hidden" value="0e0b074d-e0ce-4fe2-9cc6-b9f349458e3c">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
 
+    <#if error ??>
+        <p>${error.errMsg}</p>
+    </#if>
 </div>
 </body>
 </html>
