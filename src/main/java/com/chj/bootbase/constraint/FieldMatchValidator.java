@@ -1,6 +1,5 @@
 package com.chj.bootbase.constraint;
 
-import com.chj.bootbase.dto.MemberRequestDto;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.validation.ConstraintValidator;

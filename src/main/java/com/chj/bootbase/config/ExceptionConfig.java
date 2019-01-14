@@ -35,7 +35,7 @@ public class ExceptionConfig extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(BadRequestException.class)
     public final ModelAndView handleBadRequestException(Exception ex, HttpServletRequest request){
-        ModelAndView mav = new ModelAndView("register");
+        ModelAndView mav = new ModelAndView(request.getRequestURI());
         ErrorResponse error = new ErrorResponse(ex.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
         mav.addObject("error", error);
         return mav;

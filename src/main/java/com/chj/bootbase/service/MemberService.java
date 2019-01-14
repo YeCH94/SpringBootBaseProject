@@ -8,4 +8,5 @@ public interface MemberService extends UserDetailsService {
     Member findByEmail(String email);
     Member save(MemberRequestDto registration);
     Member findPassword(String email);
+    int updatePassword(String email, String password);
 }

@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/findMember/**", "/resource/**","/register/**", "/error/**");
+                .antMatchers("/updatePassword/**", "/findMember/**", "/resource/**","/register/**", "/error/**");
     }
 
     @Override
