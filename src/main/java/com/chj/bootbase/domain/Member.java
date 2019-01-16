@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @Table(name = "member")
 public class Member {
@@ -40,17 +41,6 @@ public class Member {
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
     private List<Role> roles;
-
-    @Override
-    public String toString() {
-        return "Member{" +
-                "id=" + id +
-                ", User Name = '" + username + '\'' +
-                ", E-mail = '" + email + '\'' +
-                ", password = '" + "*********" + '\'' +
-                ", roles = '" + roles +
-                '}';
-    }
 
     @Builder
     public Member(String username, String email, String password) {

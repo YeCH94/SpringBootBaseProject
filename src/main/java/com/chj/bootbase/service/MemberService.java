@@ -7,6 +7,5 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public interface MemberService extends UserDetailsService {
     Member findByEmail(String email);
     Member save(MemberRequestDto registration);
-    Member findPassword(String email);
-    int updatePassword(String email, String password);
+    void updatePassword(String password, Long userId);
 }

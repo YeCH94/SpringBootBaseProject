@@ -65,17 +65,7 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Member findPassword(String email) {
-        return memberRepository.findPassword(email);
-    }
-
-    @Override
-    public int updatePassword(String email, String password) {
-
-
-
-        int result = memberRepository.updatePassword(email, password);
-
-        return 0;
+    public void updatePassword(String password, Long userId) {
+        memberRepository.updatePassword(password, userId);
     }
 }

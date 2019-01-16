@@ -10,11 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
     Member findByEmail(String email);
-
-    @Query("SELECT m FROM Member m WHERE m.email = :email")
-    Member findPassword(@Param("email") String email);
-
     @Modifying
-    @Query("UPDATE Member m SET m.password = :password WHERE m.email = :email")
-    int updatePassword(@Param("email") String email, @Param("password") String password);
+    @Query("update User u set u.password = :password where u.id = :id")
+    void updatePassword(@Param("password") String password, @Param("id") Long id);
 }
