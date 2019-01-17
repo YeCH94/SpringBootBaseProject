@@ -6,23 +6,26 @@ import com.chj.bootbase.domain.PasswordResetToken;
 import com.chj.bootbase.dto.PasswordForgotDto;
 
 import com.chj.bootbase.repository.PasswordResetTokenRepository;
-import com.chj.bootbase.service.EmailService;
+import com.chj.bootbase.service.EmailServiceImpl;
 import com.chj.bootbase.service.MemberService;
+import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 
 @Controller
-@RequestMapping("/forgot-password")
+@RequestMapping("/forgot")
 public class PasswordForgotController {
 
     @Autowired
@@ -32,7 +35,7 @@ public class PasswordForgotController {
     private PasswordResetTokenRepository tokenRepository;
 
     @Autowired
-    private EmailService emailService;
+    private EmailServiceImpl emailServiceImpl;
 
     @ModelAttribute("forgotPasswordForm")
     public PasswordForgotDto forgotDto(){
@@ -41,23 +44,23 @@ public class PasswordForgotController {
 
     @GetMapping
     public String displayForgotPasswordPage() {
-        return "forgot-password";
+        return "forgot";
     }
 
     @PostMapping
     public String processForgotPasswordForm(@ModelAttribute("forgotPasswordForm") @Valid PasswordForgotDto form,
-                                            BindingResult result,
-                                            HttpServletRequest request) {
+                BindingResult result,
+                HttpServletRequest request) throws MessagingException, IOException, TemplateException {
 
-        if (result.hasErrors()){
-            return "forgot-password";
-        }
+            if (result.hasErrors()){
+                return "forgot";
+            }
 
-        Member member = memberService.findByEmail(form.getEmail());
-        if (member == null){
-            result.rejectValue("email", null, "We could not find an account for that e-mail address.");
-            return "forgot-password";
-        }
+            Member member = memberService.findByEmail(form.getEmail());
+            if (member == null){
+                result.rejectValue("email", null, "We could not find an account for that e-mail address.");
+                return "forgot";
+            }
 
         PasswordResetToken token = new PasswordResetToken();
         token.setToken(UUID.randomUUID().toString());
@@ -77,7 +80,7 @@ public class PasswordForgotController {
         String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
         model.put("resetUrl", url + "/reset-password?token=" + token.getToken());
         mail.setModel(model);
-        emailService.sendEmail(mail);
+        emailServiceImpl.sendEmail(mail);
 
         return "redirect:/forgot-password?success";
 

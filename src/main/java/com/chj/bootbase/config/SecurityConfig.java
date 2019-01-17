@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("forgot-password","/email-template/**", "/findMember/**", "/resource/**","/register/**", "/error/**");
+                .antMatchers("/reset-password**","/forgot**","/email-template**", "/findMember**", "/resource/**","/register**", "/error**");
     }
 
     @Override
@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/" ,"/h2-console/**").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/admin**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

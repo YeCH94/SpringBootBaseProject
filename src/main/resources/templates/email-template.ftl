@@ -20,17 +20,17 @@
         </tr>
         <tr>
             <td bgcolor="#eaeaea" style="padding: 40px 30px 40px 30px;">
-                <p th:text="${'Dear ' + user.firstName + ' ' + user.lastName}"></p>
+                <p>${'Dear ' + user.username}</p>
                 <p>
                     You've requested a password reset.
-                    <a th:href="${resetUrl}">reset your password</a>
+                    <a href="${resetUrl}">reset your password</a>
                 </p>
                 <p>Thanks</p>
             </td>
         </tr>
         <tr>
             <td bgcolor="#777777" style="padding: 30px 30px 30px 30px;">
-                <p th:text="${signature}"></p>
+                <p>${signature}</p>
             </td>
         </tr>
     </table>

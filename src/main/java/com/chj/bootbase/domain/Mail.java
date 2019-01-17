@@ -1,14 +1,12 @@
 package com.chj.bootbase.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Map;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class Mail {
     private  String from;

@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("reset-password")
+@RequestMapping("/reset-password")
 public class PasswordResetController {
 
     @Autowired private MemberService memberService;
