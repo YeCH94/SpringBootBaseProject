@@ -20,7 +20,7 @@
         </tr>
         <tr>
             <td bgcolor="#eaeaea" style="padding: 40px 30px 40px 30px;">
-                <p>${'Dear ' + user.username}</p>
+                <p>${'Dear ' + member.username}</p>
                 <p>
                     You've requested a password reset.
                     <a href="${resetUrl}">reset your password</a>

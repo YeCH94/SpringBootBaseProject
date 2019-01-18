@@ -1,5 +1,6 @@
 package com.chj.bootbase.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,11 +16,12 @@ import java.util.Date;
 @Table(name = "token")
 public class PasswordResetToken {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    @Column(name = "token")
+    @Column(name = "token", nullable = false, unique = true)
     private String token;
 
     @OneToOne(targetEntity = Member.class, fetch = FetchType.EAGER)
@@ -37,5 +39,11 @@ public class PasswordResetToken {
 
     public boolean isExpired() {
         return new Date().after(this.expireDate);
+    }
+
+    @Builder
+    public PasswordResetToken(String token, Member member){
+        setToken(token);
+        setMember(member);
     }
 }

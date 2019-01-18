@@ -20,7 +20,6 @@
                         <h3><i class="glyphicon glyphicon-lock" style="font-size:2em;"></i></h3>
                         <h2 class="text-center">Reset password</h2>
                         <div class="panel-body">
-
                             <#if error ??>
                                 <div class="alert alert-danger">
                                     <span> ${error} </span>
@@ -28,25 +27,15 @@
                             </#if>
 
                             <form action=/reset-password method="post">
-
                                 <input type="hidden" name="token" value="${token}"/>
-
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-lock"></i>
-                                        </span>
-                                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-lock"></i>
-                                        </span>
-                                        <input type="password" id="Confirm_Password" name="confirm_password" class="form-control" placeholder="Confirm_Password" required>
-                                    </div>
-                                </div>
+                                <p>
+                                    <label for="password" class="sr-only">Password</label>
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                                </p>
+                                <p>
+                                    <label for="Confirm Password" class="sr-only">Password</label>
+                                    <input type="password" id="Confirm_Password" name="confirm_password" class="form-control" placeholder="Confirm_Password" required>
+                                </p>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-block btn-success">Reset password</button>
                                 </div>

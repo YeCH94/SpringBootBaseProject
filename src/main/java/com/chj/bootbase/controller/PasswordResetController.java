@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.awt.*;
 
 @Controller
 @RequestMapping("/reset-password")
@@ -25,7 +26,7 @@ public class PasswordResetController {
     @Autowired private BCryptPasswordEncoder passwordEncoder;
 
     @ModelAttribute("passwordResetForm")
-    public PasswordResetDto passwordReset() {
+    public PasswordResetDto resetDto() {
         return new PasswordResetDto();
     }
 
@@ -52,14 +53,22 @@ public class PasswordResetController {
                                       RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()){
+            System.out.println(result);
             redirectAttributes.addFlashAttribute(BindingResult.class.getName() + ".passwordResetForm", result);
             redirectAttributes.addFlashAttribute("passwordResetForm", form);
             return "redirect:/reset-password?token=" + form.getToken();
         }
 
         PasswordResetToken token = tokenRepository.findByToken(form.getToken());
+        System.out.println("------------------");
+        System.out.println(token.getToken());
+        System.out.println("------------------");
         Member member = token.getMember();
+        System.out.println(member.getId());
+        System.out.println("------------------");
         String updatedPassword = passwordEncoder.encode(form.getPassword());
+        System.out.println(updatedPassword);
+        System.out.println("------------------");
         memberService.updatePassword(updatedPassword, member.getId());
         tokenRepository.delete(token);
 

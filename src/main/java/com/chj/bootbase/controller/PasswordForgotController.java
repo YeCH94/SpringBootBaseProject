@@ -53,14 +53,14 @@ public class PasswordForgotController {
                 HttpServletRequest request) throws MessagingException, IOException, TemplateException {
 
             if (result.hasErrors()){
-                return "forgot";
-            }
+            return "forgot";
+        }
 
-            Member member = memberService.findByEmail(form.getEmail());
-            if (member == null){
-                result.rejectValue("email", null, "We could not find an account for that e-mail address.");
-                return "forgot";
-            }
+        Member member = memberService.findByEmail(form.getEmail());
+        if (member == null){
+            result.rejectValue("email", null, "We could not find an account for that e-mail address.");
+            return "forgot";
+        }
 
         PasswordResetToken token = new PasswordResetToken();
         token.setToken(UUID.randomUUID().toString());
@@ -75,14 +75,14 @@ public class PasswordForgotController {
 
         Map<String, Object> model = new HashMap<>();
         model.put("token", token);
-        model.put("user", member);
+        model.put("member", member);
         model.put("signature", "https://memorynotfound.com");
         String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
         model.put("resetUrl", url + "/reset-password?token=" + token.getToken());
         mail.setModel(model);
         emailServiceImpl.sendEmail(mail);
 
-        return "redirect:/forgot-password?success";
+        return "redirect:/forgot?success";
 
     }
 

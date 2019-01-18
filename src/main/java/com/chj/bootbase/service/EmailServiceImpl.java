@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 
 
 @Service
-public class EmailServiceImpl implements EmailService{
+public class EmailServiceImpl implements EmailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
@@ -26,20 +26,22 @@ public class EmailServiceImpl implements EmailService{
     private Configuration freemarkerConfig;
 
     @Override
-    public void sendEmail(Mail mail) throws MessagingException, IOException, TemplateException {
-        MimeMessage message = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message,
-                MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
-                StandardCharsets.UTF_8.name());
+    public void sendEmail(Mail mail){
+        try {
+            MimeMessage message = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message,
+                    MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+                    StandardCharsets.UTF_8.name());
 
-        Template t = freemarkerConfig.getTemplate("email-template.ftl");
-        String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, mail.getModel());
+            Template t = freemarkerConfig.getTemplate("email-template.ftl");
+            String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, mail.getModel());
 
-        helper.setTo(mail.getTo());
-        helper.setText(html, true);
-        helper.setSubject(mail.getSubject());
-        helper.setFrom(mail.getFrom());
+            helper.setTo(mail.getTo());
+            helper.setText(html, true);
+            helper.setSubject(mail.getSubject());
+            helper.setFrom(mail.getFrom());
 
-        javaMailSender.send(message);
+            javaMailSender.send(message);
+        } catch (Exception e) {throw new RuntimeException(e);}
     }
 }
