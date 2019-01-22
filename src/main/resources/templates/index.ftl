@@ -21,6 +21,7 @@
             <#else>
                 <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
                 <li class="nav-item"><a class="nav-link" href="/register">Join</a></li>
+                <li class="nav-item"><a class="nav-link" href="/forgot">Forgot-password</a></li>
             </#if>
         </ul>
     </div>

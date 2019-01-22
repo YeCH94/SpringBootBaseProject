@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
+@ToString
 @NoArgsConstructor
 @Getter
 @Table(name = "role")
@@ -23,13 +24,6 @@ public class Role implements GrantedAuthority {
     @Builder
     public Role(String username){
         this.username = username;
-    }
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id = " + id +
-                ", name = '" + username + '\'' +
-                '}';
     }
 
     @Override
