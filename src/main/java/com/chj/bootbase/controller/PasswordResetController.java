@@ -7,7 +7,6 @@ import com.chj.bootbase.repository.PasswordResetTokenRepository;
 import com.chj.bootbase.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
-@Controller
+@RestController
 @RequestMapping("/reset-password")
 public class PasswordResetController {
 

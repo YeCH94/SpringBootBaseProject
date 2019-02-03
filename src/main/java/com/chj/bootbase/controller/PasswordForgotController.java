@@ -10,7 +10,7 @@ import com.chj.bootbase.service.EmailServiceImpl;
 import com.chj.bootbase.service.MemberService;
 import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.UUID;
 
 
-@Controller
+@RestController
 @RequestMapping("/forgot")
 public class PasswordForgotController {
 
